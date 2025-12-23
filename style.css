@@ -1,0 +1,264 @@
+/* --- VARIABILI E TEMA --- */
+:root {
+    --bg: #f4f7f6;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --header-bg: #2c3e50;
+    --header-text: #ffffff;
+    --primary: #3498db;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --warning: #f1c40f;
+    --border: #dee2e6;
+    --active-col-bg: #d6eaf8; 
+    --active-col-text: #1b4f72; 
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #121212;
+        --card: #1e1e1e;
+        --text: #e0e0e0;
+        --header-bg: #000000;
+        --header-text: #ffffff;
+        --border: #333333;
+        --active-col-bg: #2e86c1;
+        --active-col-text: #ffffff;
+    }
+}
+
+/* --- RESET E LAYOUT BASE --- */
+* { 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    margin: 0; 
+    padding: 10px;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+/* --- COMPONENTI UI --- */
+.status-bar {
+    width: 100%; 
+    max-width: 600px; 
+    padding: 12px;
+    background-color: #7f8c8d; 
+    color: white;
+    text-align: center; 
+    border-radius: 8px; 
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.controls {
+    width: 100%; 
+    max-width: 600px; 
+    background: var(--card);
+    padding: 12px; 
+    border-radius: 8px; 
+    margin-bottom: 12px;
+    border: 1px solid var(--border);
+}
+
+.input-group { 
+    display: flex; 
+    gap: 8px; 
+    margin-bottom: 10px; 
+}
+
+input[type="text"] {
+    flex: 1; 
+    padding: 12px; 
+    border: 1px solid var(--border);
+    border-radius: 6px; 
+    font-size: 16px; 
+    background: var(--bg); 
+    color: var(--text);
+}
+
+button { 
+    border: none; 
+    border-radius: 6px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.btn-add { 
+    background: var(--primary); 
+    color: white; 
+    padding: 0 15px; 
+}
+
+.btn-danger { 
+    background: rgba(231, 76, 60, 0.1); 
+    color: var(--danger); 
+    width: 100%; 
+    padding: 10px; 
+    font-size: 0.9rem;
+}
+
+/* --- TABELLA CON INTESTAZIONE E COLONNA FISSE --- */
+.table-container {
+    width: 100%; 
+    max-width: 100%; 
+    max-height: 80vh; /* Limita l'altezza per permettere lo scroll interno */
+    overflow: auto;   /* Permette scroll sia orizzontale che verticale */
+    background: var(--card); 
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+table { 
+    border-collapse: collapse; 
+    width: 100%; 
+    table-layout: fixed; 
+}
+
+/* FIX: Intestazione sempre visibile allo scroll verticale */
+thead th {
+    position: sticky;
+    top: 0;
+    z-index: 20; /* Più alto delle celle normali */
+    background: var(--header-bg);
+}
+
+/* FIX: Colonna Categorie sempre visibile allo scroll orizzontale */
+th:first-child, td:first-child {
+    width: 130px;
+    position: sticky; 
+    left: 0; 
+    background: var(--card);
+    z-index: 10; 
+    text-align: left;
+    border-right: 2px solid var(--border); 
+    padding-left: 10px;
+    font-size: 0.85rem;
+}
+
+/* Angolo in alto a sinistra (Categorie) deve stare sopra a tutto */
+thead th:first-child {
+    z-index: 30; 
+    background: var(--header-bg);
+}
+
+/* Celle Generali */
+th, td {
+    padding: 10px 4px;
+    text-align: center; 
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Header Giocatori */
+th { 
+    color: var(--header-text); 
+    height: 85px; 
+}
+
+.player-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.player-name { 
+    font-size: 0.9rem; 
+    font-weight: bold; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    width: 100%; 
+}
+
+.turn-counter { 
+    font-size: 0.75rem; 
+    margin: 4px 0; 
+}
+
+.btn-del { 
+    background: var(--danger); 
+    color: white; 
+    font-size: 10px; 
+    padding: 2px 8px; 
+}
+
+/* --- EVIDENZIAZIONE TURNO ATTIVO --- */
+th.active-player-col { 
+    background-color: var(--active-col-bg) !important; 
+    color: var(--active-col-text) !important;
+}
+
+td.active-player-col { 
+    background-color: rgba(52, 152, 219, 0.1) !important; 
+}
+
+/* --- ELEMENTI INTERNI (CENTRATURA) --- */
+.smart-input-btn, .btn-fixed, .btn-yahtzee-bonus {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 70px;
+    margin: 0 auto; 
+    padding: 8px 0;
+    background: var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.smart-input-btn span { 
+    font-size: 0.65rem; 
+    font-weight: normal; 
+    opacity: 0.8;
+}
+
+.active { 
+    background: var(--primary) !important; 
+    color: white !important; 
+}
+
+.btn-yahtzee-bonus.active { 
+    background: var(--warning) !important; 
+    color: black !important; 
+}
+
+.score-input {
+    display: block;
+    margin: 0 auto;
+    width: 85%;
+    max-width: 55px;
+    padding: 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.cell-readonly {
+    font-weight: bold;
+}
+
+.dist-bonus {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--danger);
+}
+
+tr:last-child td { 
+    background: var(--success) !important; 
+    color: white !important; 
+    font-weight: bold;
+}

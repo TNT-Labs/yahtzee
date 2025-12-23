@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Yahtzee Master Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Yahtzee Master</h1>
+    </header>
+
+    <main>
+        <div id="status-bar" class="status-bar">
+            <span id="winner-text">Aggiungi giocatori per iniziare!</span>
+        </div>
+
+        <section class="controls">
+            <div class="input-group">
+                <input type="text" id="player-name" placeholder="Nome">
+                <button onclick="addNewPlayer()" class="btn-add">Aggiungi</button>
+            </div>
+            <button onclick="resetGame()" class="btn-danger">Nuova Partita</button>
+        </section>
+
+        <section class="table-container">
+            <table id="score-table">
+                <thead>
+                    <tr id="header-row">
+                        <th>Categorie</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
