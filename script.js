@@ -103,11 +103,29 @@ function countFilledCells(pIdx) {
     return filled;
 }
 
-function setActivePlayer(i) { activePlayerIndex = i; renderTable(); }
+function setActivePlayer(i) {
+    activePlayerIndex = i;
+    renderTable();
 
-function saveScore(pIdx, catIdx, val) {
-    localStorage.setItem(`score-${pIdx}-${catIdx}`, val);
-    calculateAll();
+    // Scroll automatico corretto
+    setTimeout(() => {
+        const container = document.querySelector('.table-container');
+        const activeHeaders = document.querySelectorAll('.active-player-col');
+        
+        if (activeHeaders.length > 0 && container) {
+            const activeCol = activeHeaders[0];
+            const categoriesWidth = 145; // Corrisponde alla larghezza min-width nel CSS
+            const paddingSafety = 10;    // Piccolo margine extra per non appiccicarlo al bordo
+
+            // Calcoliamo la posizione: posizione della colonna meno la larghezza della parte fissa
+            const scrollTarget = activeCol.offsetLeft - categoriesWidth - paddingSafety;
+
+            container.scrollTo({ 
+                left: Math.max(0, scrollTarget), // Evita valori negativi
+                behavior: 'smooth' 
+            });
+        }
+    }, 100);
 }
 
 function toggleFixedScore(pIdx, catIdx, val) {
