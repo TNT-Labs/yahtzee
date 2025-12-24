@@ -207,8 +207,16 @@ function deletePlayer(i) {
 }
 
 function resetGame() {
-    if (confirm("Resettare tutto?")) {
-        localStorage.clear(); players = []; renderTable();
+    if (confirm("Iniziare una nuova partita? I punteggi verranno azzerati ma i giocatori saranno preservati.")) {
+        // Cancella solo i punteggi, non i giocatori
+        const keys = Object.keys(localStorage);
+        keys.forEach(key => {
+            if (key.startsWith('score-')) {
+                localStorage.removeItem(key);
+            }
+        });
+        activePlayerIndex = 0;
+        renderTable();
     }
 }
 
