@@ -1,4 +1,4 @@
-const CACHE_VERSION = 2; // Incrementa questo numero per forzare l'aggiornamento
+const CACHE_VERSION = 1766675470; // Incrementa questo numero per forzare l'aggiornamento
 const CACHE_NAME = `yahtzee-v${CACHE_VERSION}`;
 const assets = [
   './',
