@@ -1,7 +1,7 @@
 {
   "name": "Yahtzee Digital Scoreboard",
   "short_name": "Yahtzee",
-  "version": "2.0",
+  "version": "2025.12.25.1509",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
