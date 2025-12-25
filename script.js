@@ -232,3 +232,24 @@ function resetGame() {
 }
 
 renderTable();
+
+// Gestione aggiornamenti automatici del Service Worker
+if ('serviceWorker' in navigator) {
+    let refreshing = false;
+
+    // Ricarica la pagina quando il nuovo SW prende il controllo
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+        }
+    });
+
+    // Registra il service worker e controlla aggiornamenti
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+        // Controlla aggiornamenti ogni 60 secondi quando l'app è aperta
+        setInterval(() => {
+            reg.update();
+        }, 60000);
+    });
+}
