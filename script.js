@@ -142,7 +142,8 @@ function saveScore(pIdx, catIdx, value) {
     } else {
         localStorage.setItem(`score-${pIdx}-${catIdx}`, trimmedValue);
     }
-    renderTable();
+    // Non ricreare la tabella (perderebbe il focus), aggiorna solo i totali
+    calculateAll();
 }
 
 function addYahtzeeBonus(pIdx, catIdx) {
