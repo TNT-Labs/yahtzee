@@ -135,6 +135,16 @@ function toggleFixedScore(pIdx, catIdx, val) {
     renderTable();
 }
 
+function saveScore(pIdx, catIdx, value) {
+    const trimmedValue = value.trim();
+    if (trimmedValue === '') {
+        localStorage.removeItem(`score-${pIdx}-${catIdx}`);
+    } else {
+        localStorage.setItem(`score-${pIdx}-${catIdx}`, trimmedValue);
+    }
+    renderTable();
+}
+
 function addYahtzeeBonus(pIdx, catIdx) {
     let count = (parseInt(localStorage.getItem(`score-${pIdx}-${catIdx}`)) || 0) + 1;
     if (count > 3) count = 0;
